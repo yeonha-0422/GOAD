@@ -2,6 +2,8 @@ import numpy as np
 from data_loader import Data_Loader
 import opt_tc_tabular as tc
 import argparse
+import time
+start_time = time.time()	# 측정 시작
 
 def load_trans_data(args):
     dl = Data_Loader()
@@ -46,7 +48,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     print("Dataset: ", args.dataset)
 
-    if args.dataset == 'thyroid' or args.dataset == 'arrhythmia':
+    if args.dataset == 'CIDDS' or args.dataset == 'MetaDescription':
         n_iters = args.n_iters
         f_scores = np.zeros(n_iters)
         for i in range(n_iters):
@@ -54,3 +56,7 @@ if __name__ == '__main__':
         print("AVG f1_score", f_scores.mean())
     else:
         train_anomaly_detector(args)
+
+
+end_time = time.time()		# 측정 종료
+print('time:', end_time - start_time)	# 수행 시간 출력
